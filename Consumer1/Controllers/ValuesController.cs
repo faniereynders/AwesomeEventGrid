@@ -25,10 +25,10 @@ namespace Consumer1.Controllers
         //[ValidateHook]
         public IActionResult Post([FromBody] EventModel @event)
         {
-
+            //@event.Part
             
 
-            if (@event.EventType == "nl.t-mobilethuis.subscriptions.validate")
+                if (@event.EventType == "subscriptions.validate")
             {
                 var eventData = ((JObject)(@event.Data)).ToObject<SubscriptionValidationEventData>();
                 this.logger.LogInformation($"Got SubscriptionValidation event data, validation code: {eventData.ValidationCode}, source: {@event.Source}");

@@ -47,39 +47,13 @@ namespace WebApplication23
                 return factory.GetUrlHelper(actionContext);
             });
             services.AddAutoMapper();
-            //Mapper.Initialize(cfg =>
-            //{
-            //    var container = services.BuildServiceProvider();
-            //    foreach (var configuration in container.GetServices<IAutoMapperConfiguration>())
-            //    {
-            //        configuration.Configure(cfg);
-            //    }
-            //});
-            //services.Configure<ApiBehaviorOptions>(options =>
-            //{
-            //    options.InvalidModelStateResponseFactory = context =>
-            //    {
-            //        if (context.ModelState.ValidationState.)
-            //        {
-
-            //        }
-            //        var problemDetails = new ValidationProblemDetails(context.ModelState)
-            //        {
-            //            Instance = context.HttpContext.Request.Path,
-            //            Status = StatusCodes.Status400BadRequest,
-            //        };
-            //        return new BadRequestObjectResult(problemDetails)
-            //        {
-            //            ContentTypes = { "application/problem+json", "application/problem+xml" }
-            //        };
-            //    };
-            //});
 
 
 
+            
 
             services.AddHangfire(x => 
-                x.UseSqlServerStorage("Server=(localdb)\\mssqllocaldb;Database=EventGrid;Trusted_Connection=True;"));
+                x.UseSqlServerStorage("Server=.\\sqlexpress;Database=EventGrid;Trusted_Connection=True;"));
             services.AddMvc().AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver()).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 

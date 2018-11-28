@@ -71,7 +71,7 @@ namespace WebApplication23.Controllers
 
                 var validationEvent = new EventModel
                 {
-                    EventType = "nl.t-mobilethuis.subscriptions.validate",
+                    EventType = "subscriptions.validate",
                     Source = new Uri(source),
                     Data = validation,
                 };
