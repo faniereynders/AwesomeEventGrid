@@ -1,8 +1,8 @@
 using Newtonsoft.Json;
 
-namespace Consumer1.Controllers
+namespace AwesomeEventGrid.Models
 {
-    public class SubscriptionValidationEventData
+    public class SubscriptionValidationEventDataModel
     {
         [JsonProperty("validationCode")]
         public string ValidationCode

@@ -1,10 +1,9 @@
-﻿using Hangfire;
+﻿using AwesomeEventGrid.Models;
+using Hangfire;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
-namespace WebApplication23
+namespace AwesomeEventGrid.Infrastructure
 {
     public class EventHandler
     {

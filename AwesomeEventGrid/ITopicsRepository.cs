@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using AwesomeEventGrid.Entities;
+using System.Collections.Generic;
 
-namespace WebApplication23
+namespace AwesomeEventGrid
 {
     public interface ITopicsRepository
     {

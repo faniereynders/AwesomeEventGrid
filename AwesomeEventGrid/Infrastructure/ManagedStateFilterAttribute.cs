@@ -1,9 +1,9 @@
-﻿using Hangfire.Common;
+﻿using AwesomeEventGrid.Entities;
+using AwesomeEventGrid.Models;
+using Hangfire.Common;
 using Hangfire.States;
-using System;
-using System.Net.Http;
 
-namespace WebApplication23
+namespace AwesomeEventGrid.Infrastructure
 {
     public class ManagedStateFilterAttribute : JobFilterAttribute, IElectStateFilter
     {
@@ -31,7 +31,7 @@ namespace WebApplication23
                     var errorEvent = new EventModel
                     {
                         Data = @event,
-                        EventType = "nl.t-mobilethuis.events.failed",
+                        EventType = "event.failed",
                         Source = @event.Source
                     };
 

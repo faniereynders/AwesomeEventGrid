@@ -1,13 +1,12 @@
 ﻿using AutoMapper;
+using AwesomeEventGrid.Entities;
+using AwesomeEventGrid.Infrastructure;
+using AwesomeEventGrid.Models;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace WebApplication23
+namespace AwesomeEventGrid.Infrastructure
 {
-    
+
 
     public class TopicProfile : Profile
     {
@@ -30,7 +29,7 @@ namespace WebApplication23
         public string Resolve(Topic source, TopicModel destination, string destMember, ResolutionContext context)
         {
 
-            var url = urlHelper.Link(TopicModel.RouteName, new { name = source.Name });
+            var url = urlHelper.Link(Constants.Topics.RouteName, new { name = source.Name });
             return url;
         }
     }
@@ -56,7 +55,7 @@ namespace WebApplication23
         public string Resolve(Subscription source, SubscriptionModel destination, string destMember, ResolutionContext context)
         {
 
-            var url = urlHelper.Link(SubscriptionModel.RouteName, new { name = source.Name });
+            var url = urlHelper.Link(Constants.Subscriptions.RouteName, new { name = source.Name });
             return url;
         }
     }

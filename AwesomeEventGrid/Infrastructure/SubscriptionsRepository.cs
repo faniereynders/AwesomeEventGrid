@@ -1,11 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using AwesomeEventGrid.Entities;
+using AwesomeEventGrid.Stubs;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using WebApplication23.Controllers;
 
-namespace WebApplication23
+namespace AwesomeEventGrid.Infrastructure
 {
 
     public class SubscriptionsRepository : ISubscriptionsRepository

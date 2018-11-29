@@ -4,10 +4,12 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using AutoMapper;
-using Microsoft.AspNetCore.Http;
+using AwesomeEventGrid.Entities;
+using AwesomeEventGrid.Infrastructure;
+using AwesomeEventGrid.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace WebApplication23.Controllers
+namespace AwesomeEventGrid.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -65,9 +67,9 @@ namespace WebApplication23.Controllers
                 subscription.Topic = topic;
                 var client = httpClientFactory.CreateClient();
 
-                var validation = new SubscriptionValidationEventData() { ValidationCode = Guid.NewGuid().ToString() };
+                var validation = new SubscriptionValidationEventDataModel() { ValidationCode = Guid.NewGuid().ToString() };
 
-                var source = $"{this.Url.Link(TopicModel.RouteName,new { name = topic })}#validation";
+                var source = $"{this.Url.Link(Constants.Topics.RouteName,new { name = topic })}#validation";
 
                 var validationEvent = new EventModel
                 {

@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using AwesomeEventGrid.Entities;
+using System.Collections.Generic;
 
-namespace WebApplication23
+namespace AwesomeEventGrid.Stubs
 {
     public class Data
     {
@@ -14,6 +15,11 @@ namespace WebApplication23
                 EndpointUrl = "https://localhost:5001/api/diagnostics",
                 EventTypes = new string[] { "Events.EventDeliveryFailed" },
                 //Topic = "tmt-test"
+            });
+
+            Topics.Add(new Topic
+            {
+                Name = "foo"
             });
         }
     }

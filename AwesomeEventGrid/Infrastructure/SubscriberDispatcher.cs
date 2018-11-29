@@ -1,10 +1,11 @@
 ﻿using System.Net.Http;
 using System.Net.Http.Formatting;
 using System.Threading.Tasks;
+using AwesomeEventGrid.Entities;
+using AwesomeEventGrid.Models;
 using Hangfire;
-using WebApplication23.Controllers;
 
-namespace WebApplication23
+namespace AwesomeEventGrid.Infrastructure
 {
     public class SubscriberDispatcher
     {

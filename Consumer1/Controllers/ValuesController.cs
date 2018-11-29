@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using AwesomeEventGrid.Models;
+using System.Net.Http;
 
 namespace Consumer1.Controllers
 {
@@ -17,6 +19,8 @@ namespace Consumer1.Controllers
         private readonly ILogger<EventsController> logger;
         public EventsController(ILoggerFactory loggerFactory)
         {
+            var a = new HttpClient();
+           
             this.logger = loggerFactory.CreateLogger<EventsController>();
         }
 
@@ -30,7 +34,7 @@ namespace Consumer1.Controllers
 
                 if (@event.EventType == "subscriptions.validate")
             {
-                var eventData = ((JObject)(@event.Data)).ToObject<SubscriptionValidationEventData>();
+                var eventData = ((JObject)(@event.Data)).ToObject<SubscriptionValidationEventDataModel>();
                 this.logger.LogInformation($"Got SubscriptionValidation event data, validation code: {eventData.ValidationCode}, source: {@event.Source}");
                 // Do any additional validation (as required) and then return back the below response
 
@@ -63,48 +67,6 @@ namespace Consumer1.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-        }
-    }
-
-    public class EventModel
-    {
-        [JsonProperty("eventType")]
-        [JsonRequired, Required]
-        public string EventType
-        {
-            get; set;
-        }
-        [JsonProperty("eventTypeVersion")]
-        public string EventTypeVersion { get; set; } = "1.0";
-        [JsonProperty("cloudEventsVersion")]
-        public string CloudEventsVersion { get; set; } = "0.1";
-        [JsonProperty("source")]
-        [JsonRequired, Required]
-        public Uri Source
-        {
-            get; set;
-        }
-        [JsonProperty("eventID")]
-        [JsonRequired, Required]
-        public string EventID { get; set; } = Guid.NewGuid().ToString();
-        [JsonProperty("eventTime")]
-        public DateTime EventTime { get; set; } = DateTime.Now;
-        [JsonProperty("schemaURI")]
-        public Uri SchemaURI
-        {
-            get; set;
-        }
-        [JsonProperty("contentType")]
-        public string ContentType { get; set; } = "application/json";
-        [JsonProperty("extensions")]
-        public Dictionary<string, object> Extensions
-        {
-            get; set;
-        }
-        [JsonProperty("data")]
-        public object Data
-        {
-            get; set;
         }
     }
 }

@@ -1,9 +1,10 @@
-﻿using System;
+﻿using AwesomeEventGrid.Entities;
+using AwesomeEventGrid.Stubs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
-namespace WebApplication23
+namespace AwesomeEventGrid.Infrastructure
 {
     public class TopicsRepository : ITopicsRepository
     {

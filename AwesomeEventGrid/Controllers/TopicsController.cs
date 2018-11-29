@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
+﻿using System.Collections.Generic;
 using AutoMapper;
-using Hangfire;
-using Hangfire.Server;
-using Hangfire.Storage;
+using AwesomeEventGrid.Entities;
+using AwesomeEventGrid.Infrastructure;
+using AwesomeEventGrid.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace WebApplication23.Controllers
+namespace AwesomeEventGrid.Controllers
 {
 
 
@@ -36,7 +33,7 @@ namespace WebApplication23.Controllers
             return Ok(model);
         }
 
-        [HttpGet("{name}", Name = TopicModel.RouteName)]
+        [HttpGet("{name}", Name = Constants.Topics.RouteName)]
         public IActionResult GetByName(string name)
         {
             var topic = topicsRepository.FindByName(name);

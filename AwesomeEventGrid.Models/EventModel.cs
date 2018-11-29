@@ -3,19 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace WebApplication23
+namespace AwesomeEventGrid.Models
 {
-    //public class Event
-    //{
-    //    public string Topic { get; set; }
-    //    public string Subject { get; set; }
-    //    public string EventType { get; set; }
-    //    public DateTime EventTime { get; set; } = DateTime.Now;
-    //    public string Id { get; set; } = Guid.NewGuid().ToString();
-    //    public object Data { get; set; }
-    //    public string DataVersion { get; set; } = "1.0";
-    //    public string MetadataVersion { get; set; } = "1.0";
-    //}
     public class EventModel
     {
         [JsonProperty("eventType")]
@@ -29,7 +18,7 @@ namespace WebApplication23
         [JsonRequired, Required]
         public Uri Source { get; set; }
         [JsonProperty("eventID")]
-        
+
         public string EventID { get; set; } = Guid.NewGuid().ToString();
         [JsonProperty("eventTime")]
         public DateTime EventTime { get; set; } = DateTime.Now;
@@ -38,10 +27,8 @@ namespace WebApplication23
         [JsonProperty("contentType")]
         public string ContentType { get; set; } = "application/json";
         [JsonProperty("extensions")]
-        public Dictionary<string,object> Extensions { get; set; }
+        public Dictionary<string, object> Extensions { get; set; }
         [JsonProperty("data")]
         public object Data { get; set; }
     }
-
-
 }

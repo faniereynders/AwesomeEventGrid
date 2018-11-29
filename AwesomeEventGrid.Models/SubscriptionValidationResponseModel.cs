@@ -1,11 +1,7 @@
-namespace Consumer1.Controllers
+namespace AwesomeEventGrid.Models
 {
     public class SubscriptionValidationResponse
     {
-        public SubscriptionValidationResponse()
-        {
-        }
-
         public string ValidationResponse
         {
             get;

@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using AwesomeEventGrid.Infrastructure;
+using AwesomeEventGrid.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace WebApplication23.Controllers
 {
