@@ -13,11 +13,11 @@ namespace AwesomeEventGrid.Controllers
     [ApiController]
     public class TopicsController : ControllerBase
     {
-        private readonly EventHandler eventHandler;
+        private readonly DefaultEventGridEventHandler eventHandler;
         private readonly ITopicsRepository topicsRepository;
         private readonly IMapper mapper;
 
-        public TopicsController(EventHandler eventHandler, ITopicsRepository topicsRepository, IMapper mapper)
+        public TopicsController(DefaultEventGridEventHandler eventHandler, ITopicsRepository topicsRepository, IMapper mapper)
         {
             this.eventHandler = eventHandler;
             this.topicsRepository = topicsRepository;

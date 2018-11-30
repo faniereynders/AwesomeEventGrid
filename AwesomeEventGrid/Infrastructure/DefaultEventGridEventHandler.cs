@@ -5,12 +5,12 @@ using System.Linq;
 
 namespace AwesomeEventGrid.Infrastructure
 {
-    public class EventHandler
+    public class DefaultEventGridEventHandler
     {
         private readonly ISubscriptionsRepository subscriptionsRepository;
         private readonly SubscriberDispatcher subscriberDispatcher;
 
-        public EventHandler(ISubscriptionsRepository subscriptionsRepository, SubscriberDispatcher subscriberDispatcher)
+        public DefaultEventGridEventHandler(ISubscriptionsRepository subscriptionsRepository, SubscriberDispatcher subscriberDispatcher)
         {
             this.subscriptionsRepository = subscriptionsRepository;
             this.subscriberDispatcher = subscriberDispatcher;

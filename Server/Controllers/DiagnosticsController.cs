@@ -8,9 +8,9 @@ namespace WebApplication23.Controllers
     [ApiController]
     public class DiagnosticsController : ControllerBase
     {
-        private readonly EventHandler eventHandler;
+        private readonly DefaultEventGridEventHandler eventHandler;
 
-        public DiagnosticsController(EventHandler eventHandler)
+        public DiagnosticsController(DefaultEventGridEventHandler eventHandler)
         {
             this.eventHandler = eventHandler;
         }

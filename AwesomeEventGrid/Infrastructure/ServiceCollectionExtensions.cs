@@ -5,15 +5,20 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace AwesomeEventGrid.Infrastructure
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddAwesomeEventGrid(this IServiceCollection services)
+        public static IServiceCollection AddAwesomeEventGrid(this IServiceCollection services, Action<EventGridOptions> options = null)
         {
+            if (options == null)
+            {
+                options = (a) => new EventGridOptions();
+            }
             services.AddHttpClient();
-            services.AddSingleton<EventHandler>();
+            services.AddSingleton<DefaultEventGridEventHandler>();
             services.AddSingleton<ITopicsRepository, TopicsRepository>();
             services.AddSingleton<SubscriberDispatcher>();
             services.AddSingleton<ISubscriptionsRepository, SubscriptionsRepository>();
@@ -28,6 +33,8 @@ namespace AwesomeEventGrid.Infrastructure
             });
             services.AddAutoMapper();
 
+            services.AddOptions<EventGridOptions>();
+            services.Configure(options);
             return services;
         }
 

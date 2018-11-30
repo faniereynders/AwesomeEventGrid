@@ -23,7 +23,7 @@ namespace AwesomeEventGrid.Infrastructure
 
                 if (retryCount == 3)
                 {
-                    var handler = (EventHandler)activator.ActivateJob(typeof(EventHandler));
+                    var handler = (DefaultEventGridEventHandler)activator.ActivateJob(typeof(DefaultEventGridEventHandler));
                    // var httpClientFactory = (IHttpClientFactory)serviceProvider.GetService(typeof(IHttpClientFactory));
                     var subscriber = (Subscription)context.BackgroundJob.Job.Args[0];
                     var @event = (EventModel)context.BackgroundJob.Job.Args[1];

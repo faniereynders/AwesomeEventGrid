@@ -3,6 +3,7 @@ using AwesomeEventGrid.Entities;
 using AwesomeEventGrid.Infrastructure;
 using AwesomeEventGrid.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 
 namespace AwesomeEventGrid.Infrastructure
 {
@@ -20,16 +21,17 @@ namespace AwesomeEventGrid.Infrastructure
 
     public class TopicIdValueResolver : IValueResolver<Topic, TopicModel, string>
     {
-        private readonly IUrlHelper urlHelper;
 
-        public TopicIdValueResolver(IUrlHelper urlHelper)
+        private readonly IOptions<EventGridOptions> options;
+
+        public TopicIdValueResolver(IOptions<EventGridOptions> options)
         {
-            this.urlHelper = urlHelper;
+            this.options = options;
         }
         public string Resolve(Topic source, TopicModel destination, string destMember, ResolutionContext context)
         {
 
-            var url = urlHelper.Link(Constants.Topics.RouteName, new { name = source.Name });
+            var url = $"{options.Value.BasePath}/{options.Value.TopicsPath}/{source.Name }";
             return url;
         }
     }
@@ -39,7 +41,7 @@ namespace AwesomeEventGrid.Infrastructure
         public SubscriptionProfile()
         {
             CreateMap<Subscription, SubscriptionModel>()
-                .ForMember(t => t.Id, o => o.MapFrom<SubscriptionIdValueResolver>())
+               // .ForMember(t => t.Id, o => o.MapFrom<SubscriptionIdValueResolver>())
                 .ReverseMap();
         }
     }
