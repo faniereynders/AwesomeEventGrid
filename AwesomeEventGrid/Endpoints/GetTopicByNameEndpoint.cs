@@ -21,12 +21,13 @@ namespace AwesomeEventGrid.Endpoints
 
         public async Task InvokeAsync(HttpContext context, ITopicsRepository topicsRepository, IMapper mapper)
         {
-            context.Response.ContentType = "application/json; charset=utf-8";
+            ModelState.Reset();
 
             var name = (string)context.GetRouteData().Values["name"];
             var topic = topicsRepository.FindByName(name);
             if (topic == null)
             {
+                ModelState.AddError("name", "Topic with this name not found");
                 await NotFound(context);
             }
             else

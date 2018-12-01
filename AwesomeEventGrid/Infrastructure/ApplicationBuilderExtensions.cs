@@ -56,7 +56,7 @@ namespace AwesomeEventGrid.Infrastructure
             routeBuilder.MapMiddlewarePost(topicsPath, b => b.UseMiddleware<CreateTopicEndpoint>());
 
             var eventsPath = $"{options.Value.BasePath}/{options.Value.EventsPath}";
-            routeBuilder.MapMiddlewarePost(eventsPath, b => b.UseMiddleware<PublishEventsToTopicEndpoint>());
+            routeBuilder.MapMiddlewarePut(eventsPath, b => b.UseMiddleware<PublishEventsToTopicEndpoint>());
 
 
             routeBuilder.MapGet(

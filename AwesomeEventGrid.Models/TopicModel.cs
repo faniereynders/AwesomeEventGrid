@@ -1,15 +1,22 @@
 ﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace AwesomeEventGrid.Models
 {
-    public class TopicModel
+    public class TopicModel : IValidatableObject
     {
-        //public const string RouteName = "Topics.GetByName";
-        //[JsonProperty("_self", Order = -1)]
         public string Id { get; set; }
 
-        [Required]
         public string Name { get; set; }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (string.IsNullOrEmpty(Name))
+            {
+                yield return new ValidationResult("Topic name is required", new string[] { nameof(Name) });
+
+            }
+        }
     }
 }
