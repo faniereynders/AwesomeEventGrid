@@ -1,17 +1,13 @@
 ﻿using AutoMapper;
 using AwesomeEventGrid.Models;
 using Microsoft.AspNetCore.Http;
-using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Extensions.DependencyInjection;
 namespace AwesomeEventGrid.Endpoints
 {
-    public class GetAllTopicsEndpoint: EndpointBase
+    public class TopicsGetAllEndpoint: EndpointBase
     {
-        public GetAllTopicsEndpoint(RequestDelegate next)
+        public TopicsGetAllEndpoint(RequestDelegate next)
         {
 
         }

@@ -2,22 +2,20 @@
 using AwesomeEventGrid.Models;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
-using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Routing;
 using System.IO;
 using AwesomeEventGrid.Infrastructure;
-using System;
 using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Routing;
 
 namespace AwesomeEventGrid.Endpoints
 {
-    public class PublishEventsToTopicEndpoint : EndpointBase
+    public class TopicsEventsEndpoint : EndpointBase
     {
 
-        public PublishEventsToTopicEndpoint(RequestDelegate next)
+        public TopicsEventsEndpoint(RequestDelegate next)
         {
 
         }
@@ -26,7 +24,7 @@ namespace AwesomeEventGrid.Endpoints
         {
             var options = context.RequestServices.GetService<IOptions<AwesomeEventGridOptions>>();
             ModelState.Reset();
-            var topic = (string)context.GetRouteData().Values["topic"];
+            var topic = (string)context.GetRouteData().Values["name"];
             
             if (topicsRepository.FindByName(topic) == null)
             {

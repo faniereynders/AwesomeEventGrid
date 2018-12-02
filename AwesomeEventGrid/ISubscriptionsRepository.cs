@@ -5,7 +5,8 @@ namespace AwesomeEventGrid
 {
     public interface ISubscriptionsRepository
     {
-        IEnumerable<Subscription> GetAll();
+        Subscription FindByName(string topic, string name);
+        IEnumerable<Subscription> GetAll(string topic);
         Subscription AddOrUpdate(Subscription subscription);
         void Remove(string name);
     }

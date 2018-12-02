@@ -19,7 +19,7 @@ namespace AwesomeEventGrid.Infrastructure
         {
             foreach (var @event in events)
             {
-                var subs = subscriptionsRepository.GetAll().Where(s => (s.Topic == null || s.Topic == topic) && (s.EventTypes == null || s.EventTypes.Contains(@event.EventType)));
+                var subs = subscriptionsRepository.GetAll(topic).Where(s => s.EventTypes == null || s.EventTypes.Contains(@event.EventType));
                 foreach (var subscriber in subs)
                 {
                     

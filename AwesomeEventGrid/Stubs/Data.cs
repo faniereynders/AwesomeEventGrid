@@ -10,12 +10,13 @@ namespace AwesomeEventGrid.Stubs
 
         public Data()
         {
-            Subscriptions.Add(new Subscription
-            {
-                EndpointUrl = "https://localhost:5001/api/diagnostics",
-                EventTypes = new string[] { "Events.EventDeliveryFailed" },
-                //Topic = "tmt-test"
-            });
+            Subscriptions
+                .Add(new Subscription
+                {
+                    EndpointUrl = "https://localhost:5001/api/diagnostics",
+                    EventTypes = new string[] { "Events.EventDeliveryFailed" },
+                    Topic = ""
+                });
 
             Topics.Add(new Topic
             {

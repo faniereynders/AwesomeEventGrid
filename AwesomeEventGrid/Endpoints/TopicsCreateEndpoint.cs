@@ -2,25 +2,19 @@
 using AwesomeEventGrid.Models;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
-using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Routing;
 using System.IO;
 using AwesomeEventGrid.Infrastructure;
-using System;
 using AwesomeEventGrid.Entities;
-using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.DataAnnotations;
 using Microsoft.Extensions.Options;
 
 namespace AwesomeEventGrid.Endpoints
 {
-    public class CreateTopicEndpoint : EndpointBase
+    public class TopicsCreateEndpoint : EndpointBase
     {
 
-        public CreateTopicEndpoint(RequestDelegate next)
+        public TopicsCreateEndpoint(RequestDelegate next)
         {
 
         }

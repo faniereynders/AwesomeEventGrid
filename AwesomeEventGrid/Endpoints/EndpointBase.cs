@@ -4,10 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace AwesomeEventGrid.Endpoints
@@ -50,6 +47,15 @@ namespace AwesomeEventGrid.Endpoints
             context.Response.StatusCode = 202;
             return Task.CompletedTask;
         }
+
+        //public async Task Created(HttpContext context, string url, object model)
+        //{
+        //    var options = context.RequestServices.GetService<IOptions<AwesomeEventGridOptions>>();
+        //    context.Response.ContentType = "application/json; charset=utf-8";
+        //    context.Response.StatusCode = 200;
+        //    context.Response.Headers.Add("Link", url);
+        //    await context.Response.WriteAsync(JsonConvert.SerializeObject(model, options.Value.SerializerSettings));
+        //}
 
         public async Task CreatedAt(HttpContext context, string url, object model)
         {

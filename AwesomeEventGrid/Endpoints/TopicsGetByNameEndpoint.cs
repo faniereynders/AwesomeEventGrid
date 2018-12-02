@@ -1,20 +1,15 @@
 ﻿using AutoMapper;
 using AwesomeEventGrid.Models;
 using Microsoft.AspNetCore.Http;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Routing;
+using System.Threading.Tasks;
 
 namespace AwesomeEventGrid.Endpoints
 {
-    public class GetTopicByNameEndpoint: EndpointBase
+    public class TopicsGetByNameEndpoint: EndpointBase
     {
 
-        public GetTopicByNameEndpoint(RequestDelegate next)
+        public TopicsGetByNameEndpoint(RequestDelegate next)
         {
 
         }

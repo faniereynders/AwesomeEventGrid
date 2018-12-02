@@ -1,14 +1,10 @@
 ﻿using Hangfire;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Routing;
-using System;
 using Microsoft.Extensions.DependencyInjection;
-using System.Linq;
-using System.Text;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using AwesomeEventGrid.Endpoints;
+using Microsoft.AspNetCore.Routing;
 
 namespace AwesomeEventGrid.Infrastructure
 {
@@ -19,44 +15,30 @@ namespace AwesomeEventGrid.Infrastructure
             
 
             var options = app.ApplicationServices.GetRequiredService<IOptions<EventGridOptions>>();
-           // config.Bind(options);
+            // config.Bind(options);
 
             var routeHandler = new RouteHandler(context =>
             {
-                var routeData = context.GetRouteData();
-                var routeValues = routeData.Values;
-                var route = routeData.Routers.OfType<Route>().First();
-
-                switch (route.Name)
-                {
-                    case "EventGrid.GetTopics":
-                        return context.Response.WriteAsync($"EventGrid.GetTopics");
-                    case "EventGrid.GetTopicByName":
-                        return context.Response.WriteAsync($"EventGrid.GetTopicByName");
-                    
-                    default:
-                        break;
-                }
-
-
-
-
-
-                
+               
                 return context.Response.WriteAsync(
-                    $"Hello! Route values: {string.Join(", ", routeValues)}");
+                    $"Hello!");
             });
 
             var routeBuilder = new RouteBuilder(app, routeHandler);
 
             var topicsPath = $"{options.Value.BasePath}/{options.Value.TopicsPath}";
 
-            routeBuilder.MapMiddlewareGet(topicsPath, b => b.UseMiddleware<GetAllTopicsEndpoint>());
-            routeBuilder.MapMiddlewareGet(topicsPath + "/{name}", b => b.UseMiddleware<GetTopicByNameEndpoint>());
-            routeBuilder.MapMiddlewarePost(topicsPath, b => b.UseMiddleware<CreateTopicEndpoint>());
+            routeBuilder.MapMiddlewareGet(topicsPath, b => b.UseMiddleware<TopicsGetAllEndpoint>());
+            routeBuilder.MapMiddlewarePost(topicsPath, b => b.UseMiddleware<TopicsCreateEndpoint>());
+            routeBuilder.MapMiddlewareGet(topicsPath + "/{name}", b => b.UseMiddleware<TopicsGetByNameEndpoint>());
+            routeBuilder.MapMiddlewarePost(topicsPath + "/{name}", b => b.UseMiddleware<TopicsEventsEndpoint>());
 
-            var eventsPath = $"{options.Value.BasePath}/{options.Value.EventsPath}";
-            routeBuilder.MapMiddlewarePut(eventsPath, b => b.UseMiddleware<PublishEventsToTopicEndpoint>());
+
+            var subscriptionsPath = $"{options.Value.BasePath}/{options.Value.SubscriptionsPath}";
+
+            routeBuilder.MapMiddlewareGet(subscriptionsPath, b => b.UseMiddleware<SubscriptionsGetAllEndpoint>());
+            routeBuilder.MapMiddlewarePut(subscriptionsPath + "/{topic}", b => b.UseMiddleware<SubscriptionsCreateOrUpdateEndpoint>());
+            routeBuilder.MapMiddlewareGet(subscriptionsPath + "/{topic}/{name}", b => b.UseMiddleware<SubscriptionsGetByNameEndpoint>());
 
 
             routeBuilder.MapGet(
@@ -78,11 +60,7 @@ namespace AwesomeEventGrid.Infrastructure
 
          
 
-            routeBuilder.MapRoute(
-                "EventGrid.GetTopicByName",
-                "_api/topics/{name}"
-
-            );
+            
 
 
             var routes = routeBuilder.Build();
@@ -110,7 +88,7 @@ namespace AwesomeEventGrid.Infrastructure
     {
         public string BasePath { get; set; } = "Awesome.EventGrid";
         public string TopicsPath { get; set; } = $"topics";
-        public string EventsPath { get; set; } = "topics/{topic}/events";
+        //public string EventsPath { get; set; } = "topics/{topic}";
         public string SubscriptionsPath { get; set; } = "subscriptions";
     }
 }

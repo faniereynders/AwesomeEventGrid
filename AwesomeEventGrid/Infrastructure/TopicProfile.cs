@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
 using AwesomeEventGrid.Entities;
-using AwesomeEventGrid.Infrastructure;
 using AwesomeEventGrid.Models;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
 namespace AwesomeEventGrid.Infrastructure
@@ -46,19 +44,19 @@ namespace AwesomeEventGrid.Infrastructure
         }
     }
 
-    public class SubscriptionIdValueResolver : IValueResolver<Subscription, SubscriptionModel, string>
-    {
-        private readonly IUrlHelper urlHelper;
+    //public class SubscriptionIdValueResolver : IValueResolver<Subscription, SubscriptionModel, string>
+    //{
+    //    private readonly IUrlHelper urlHelper;
 
-        public SubscriptionIdValueResolver(IUrlHelper urlHelper)
-        {
-            this.urlHelper = urlHelper;
-        }
-        public string Resolve(Subscription source, SubscriptionModel destination, string destMember, ResolutionContext context)
-        {
+    //    public SubscriptionIdValueResolver(IUrlHelper urlHelper)
+    //    {
+    //        this.urlHelper = urlHelper;
+    //    }
+    //    public string Resolve(Subscription source, SubscriptionModel destination, string destMember, ResolutionContext context)
+    //    {
 
-            var url = urlHelper.Link(Constants.Subscriptions.RouteName, new { name = source.Name });
-            return url;
-        }
-    }
+    //        var url = urlHelper.Link(Constants.Subscriptions.RouteName, new { name = source.Name });
+    //        return url;
+    //    }
+    //}
 }

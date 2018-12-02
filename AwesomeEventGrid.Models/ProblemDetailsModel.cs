@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace AwesomeEventGrid.Models
+﻿namespace AwesomeEventGrid.Models
 {
     public class ProblemDetailsModel
     {
