@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Server", "Server\Server.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Consumer1", "Consumer1\Consumer1.csproj", "{7D9470F1-B22D-4734-9F49-E4301FDDBC77}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AwesomeEventGrid", "AwesomeEventGrid\AwesomeEventGrid.csproj", "{F0BFA5DB-536E-4B6D-AD3B-A4D39A0A5741}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AwesomeEventGrid", "AwesomeEventGrid\AwesomeEventGrid.csproj", "{F0BFA5DB-536E-4B6D-AD3B-A4D39A0A5741}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AwesomeEventGrid.Models", "AwesomeEventGrid.Models\AwesomeEventGrid.Models.csproj", "{F08ABA52-2368-418C-9E82-C427F210B712}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AwesomeEventGrid.Abstractions", "AwesomeEventGrid.Models\AwesomeEventGrid.Abstractions.csproj", "{F08ABA52-2368-418C-9E82-C427F210B712}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

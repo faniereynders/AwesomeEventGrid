@@ -1,4 +1,4 @@
-﻿namespace AwesomeEventGrid.Models
+﻿namespace AwesomeEventGrid.Abstractions.Models
 {
     public class ProblemDetailsModel
     {

@@ -1,44 +1,47 @@
 ﻿using AutoMapper;
+using AwesomeEventGrid.Abstractions;
+using AwesomeEventGrid.Abstractions.Options;
 using AwesomeEventGrid.Stubs;
 using Hangfire;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Options;
 using System;
 
 namespace AwesomeEventGrid.Infrastructure
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddAwesomeEventGrid(this IServiceCollection services, Action<EventGridOptions> options = null)
+        public static IServiceCollection AddAwesomeEventGrid(this IServiceCollection services, IEventPersister eventPersister, Action<AwesomeEventGridOptions> options = null)
         {
             if (options == null)
             {
-                options = (a) => new EventGridOptions();
+                options = o => new AwesomeEventGridOptions();
             }
             services.AddHttpClient();
-            services.AddSingleton<DefaultEventGridEventHandler>();
-            services.AddSingleton<ITopicsRepository, TopicsRepository>();
-            services.AddSingleton<SubscriberDispatcher>();
-            services.AddSingleton<ISubscriptionsRepository, SubscriptionsRepository>();
+            services.TryAddScoped<IEventGridEventHandler, DefaultEventGridEventHandler>();
+            services.TryAddSingleton<ITopicsRepository, TopicsRepository>();
+            services.TryAddSingleton<ISubscriberEventDispatcher,HangfireSubscriberEventDispatcher>();
+            services.TryAddSingleton<ISubscriptionsRepository, SubscriptionsRepository>();
+            services.TryAddSingleton(eventPersister);
             services.AddSingleton<Data>();
 
-            //services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
-            //services.AddScoped<IUrlHelper>(x =>
-            //{
-            //    var actionContext = x.GetRequiredService<IActionContextAccessor>().ActionContext;
-            //    var factory = x.GetRequiredService<IUrlHelperFactory>();
-            //    return factory.GetUrlHelper(actionContext);
-            //});
             services.AddAutoMapper();
 
-            services.AddOptions<EventGridOptions>();
+            services.AddOptions<AwesomeEventGridOptions>();
             services.Configure(options);
+
+            
+            eventPersister.ConfigureServices(services);
+            
+
             return services;
         }
 
-        public static IServiceCollection WithHangFire(this IServiceCollection services, string connectionstring)
-        {
-            services.AddHangfire(x => x.UseSqlServerStorage(connectionstring));
-            return services;
-        }
+        //public static IServiceCollection WithHangFire(this IServiceCollection services, string connectionstring)
+        //{
+        //    services.AddHangfire(x => x.UseSqlServerStorage(connectionstring));
+        //    return services;
+        //}
     }
 }

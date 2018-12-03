@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace AwesomeEventGrid.Models
+namespace AwesomeEventGrid.Abstractions.Models
 {
     public class EventModel
     {

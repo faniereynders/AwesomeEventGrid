@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using AwesomeEventGrid.Models;
+using AwesomeEventGrid.Abstractions.Models;
 using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -7,6 +7,7 @@ using AwesomeEventGrid.Infrastructure;
 using Microsoft.Extensions.Options;
 using System.Linq;
 using Microsoft.AspNetCore.Routing;
+using AwesomeEventGrid.Abstractions.Options;
 
 namespace AwesomeEventGrid.Endpoints
 {
@@ -20,7 +21,7 @@ namespace AwesomeEventGrid.Endpoints
 
         
 
-        public async Task InvokeAsync(HttpContext context, ISubscriptionsRepository subscriptionsRepository, IMapper mapper, DefaultEventGridEventHandler eventHandler, IOptions<AwesomeEventGridOptions> options)
+        public async Task InvokeAsync(HttpContext context, ISubscriptionsRepository subscriptionsRepository, IMapper mapper, IOptions<AwesomeEventGridOptions> options)
         {
             var routeData = context.GetRouteData();
             var topic = context.Request.Query["topic"].FirstOrDefault();

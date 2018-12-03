@@ -1,8 +1,9 @@
-﻿using System;
+﻿using AwesomeEventGrid.Abstractions;
+using System;
 
 namespace AwesomeEventGrid.Entities
 {
-    public class Subscription
+    public class Subscription : ISubscription
     {
         public string Name { get; set; }
         public Guid Id { get; set; } = Guid.NewGuid();

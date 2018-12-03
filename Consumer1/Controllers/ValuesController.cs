@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using AwesomeEventGrid.Models;
 using System.Net.Http;
+using AwesomeEventGrid.Abstractions.Models;
 
 namespace Consumer1.Controllers
 {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace AwesomeEventGrid.Models
+namespace AwesomeEventGrid.Abstractions.Models
 {
     public class ValidationProblemDetailsModel: ProblemDetailsModel
     {

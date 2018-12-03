@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Hangfire" Version="1.6.21" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AwesomeEventGrid.Models\AwesomeEventGrid.Abstractions.csproj" />
+    <ProjectReference Include="..\AwesomeEventGrid\AwesomeEventGrid.csproj" />
+  </ItemGroup>
+
+</Project>

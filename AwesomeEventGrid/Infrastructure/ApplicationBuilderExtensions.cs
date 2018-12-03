@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using AwesomeEventGrid.Endpoints;
 using Microsoft.AspNetCore.Routing;
+using AwesomeEventGrid.Abstractions.Options;
 
 namespace AwesomeEventGrid.Infrastructure
 {
@@ -14,7 +15,8 @@ namespace AwesomeEventGrid.Infrastructure
         {
             
 
-            var options = app.ApplicationServices.GetRequiredService<IOptions<EventGridOptions>>();
+            var options = app.ApplicationServices.GetRequiredService<IOptions<AwesomeEventGridOptions>>();
+            var eventPersister = app.ApplicationServices.GetRequiredService<IEventPersister>();
             // config.Bind(options);
 
             var routeHandler = new RouteHandler(context =>
@@ -41,25 +43,6 @@ namespace AwesomeEventGrid.Infrastructure
             routeBuilder.MapMiddlewareGet(subscriptionsPath + "/{topic}/{name}", b => b.UseMiddleware<SubscriptionsGetByNameEndpoint>());
 
 
-            routeBuilder.MapGet(
-                topicsPath, async (context) => await context.Response.WriteAsync($"EventGrid.GetAllTopics")
-            );
-            routeBuilder.MapGet(topicsPath + "/{name}", async (context) => {
-                var name = context.GetRouteData().Values["name"];
-
-                await context.Response.WriteAsync($"EventGrid.GetTopicByName: {name}");
-            });
-            routeBuilder.MapPost(
-                topicsPath, async (context) => await context.Response.WriteAsync($"EventGrid.CreateTopic")
-            );
-
-            routeBuilder.MapPut(
-               topicsPath, async (context) => await context.Response.WriteAsync($"EventGrid.UpdateTopic")
-           );
-           
-
-         
-
             
 
 
@@ -67,28 +50,20 @@ namespace AwesomeEventGrid.Infrastructure
             app.UseRouter(routes);
 
 
+            eventPersister.ConfigureMiddleware(app);
+            //GlobalJobFilters.Filters.Add(new ManagedStateFilterAttribute(new HangfireActivator(app.ApplicationServices)));
+            //var hangfireOptions = new BackgroundJobServerOptions
+            //{
+            //    Queues = new[] { "events" },
+            //    //  Activator = new HangfireActivator(serviceProvider),
+                
+            //};
 
-            GlobalJobFilters.Filters.Add(new ManagedStateFilterAttribute(new HangfireActivator(app.ApplicationServices)));
-            var hangfireOptions = new BackgroundJobServerOptions
-            {
-                Queues = new[] { "events" },
-                //  Activator = new HangfireActivator(serviceProvider),
 
-            };
-
-
-            app.UseHangfireServer(hangfireOptions);
-            app.UseHangfireDashboard();
+            //app.UseHangfireServer(hangfireOptions);
+            //app.UseHangfireDashboard();
 
             return app;
         }
-    }
-
-    public class EventGridOptions
-    {
-        public string BasePath { get; set; } = "Awesome.EventGrid";
-        public string TopicsPath { get; set; } = $"topics";
-        //public string EventsPath { get; set; } = "topics/{topic}";
-        public string SubscriptionsPath { get; set; } = "subscriptions";
     }
 }

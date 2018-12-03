@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
+using AwesomeEventGrid.Abstractions.Models;
+using AwesomeEventGrid.Abstractions.Options;
 using AwesomeEventGrid.Entities;
-using AwesomeEventGrid.Models;
 using Microsoft.Extensions.Options;
 
 namespace AwesomeEventGrid.Infrastructure
@@ -20,9 +21,9 @@ namespace AwesomeEventGrid.Infrastructure
     public class TopicIdValueResolver : IValueResolver<Topic, TopicModel, string>
     {
 
-        private readonly IOptions<EventGridOptions> options;
+        private readonly IOptions<AwesomeEventGridOptions> options;
 
-        public TopicIdValueResolver(IOptions<EventGridOptions> options)
+        public TopicIdValueResolver(IOptions<AwesomeEventGridOptions> options)
         {
             this.options = options;
         }

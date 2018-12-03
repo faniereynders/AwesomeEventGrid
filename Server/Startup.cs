@@ -1,4 +1,5 @@
 ﻿using System;
+using AwesomeEventGrid.Abstractions.Options;
 using AwesomeEventGrid.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -21,8 +22,9 @@ namespace WebApplication23
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddAwesomeEventGrid().WithHangFire("Server=(localdb)\\mssqllocaldb;Database=EventGrid;Trusted_Connection=True;");
-            services.AddAwesomeEventGrid().WithHangFire("Server=.\\sqlexpress;Database=EventGrid;Trusted_Connection=True;");
+            var eventPersister = new HangfireEventPersister("Server=(localdb)\\mssqllocaldb;Database=EventGrid;Trusted_Connection=True;");
+
+            services.AddAwesomeEventGrid(eventPersister);
 
 
             services.AddMvc().AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver()).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);

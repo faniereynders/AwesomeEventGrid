@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using AwesomeEventGrid.Models;
+using AwesomeEventGrid.Abstractions.Models;
 using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using System.Threading.Tasks;

@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using AwesomeEventGrid.Models;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System.Text;
@@ -8,6 +7,8 @@ using System.IO;
 using AwesomeEventGrid.Infrastructure;
 using AwesomeEventGrid.Entities;
 using Microsoft.Extensions.Options;
+using AwesomeEventGrid.Abstractions.Models;
+using AwesomeEventGrid.Abstractions.Options;
 
 namespace AwesomeEventGrid.Endpoints
 {

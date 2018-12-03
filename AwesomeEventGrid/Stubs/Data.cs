@@ -14,7 +14,7 @@ namespace AwesomeEventGrid.Stubs
                 .Add(new Subscription
                 {
                     EndpointUrl = "https://localhost:5001/api/diagnostics",
-                    EventTypes = new string[] { "Events.EventDeliveryFailed" },
+                    EventTypes = new string[] { "events.deliveryFailed" },
                     Topic = ""
                 });
 

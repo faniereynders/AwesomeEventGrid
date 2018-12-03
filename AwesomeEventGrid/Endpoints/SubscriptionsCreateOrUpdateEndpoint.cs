@@ -1,16 +1,17 @@
 ﻿using AutoMapper;
-using AwesomeEventGrid.Models;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
-using AwesomeEventGrid.Infrastructure;
 using System;
 using AwesomeEventGrid.Entities;
 using Microsoft.Extensions.Options;
 using System.Net.Http;
 using Microsoft.AspNetCore.Routing;
+using AwesomeEventGrid.Abstractions.Options;
+using AwesomeEventGrid.Abstractions.Models;
+using AwesomeEventGrid.Abstractions;
 
 namespace AwesomeEventGrid.Endpoints
 {
@@ -24,7 +25,7 @@ namespace AwesomeEventGrid.Endpoints
 
         
 
-        public async Task InvokeAsync(HttpContext context, IHttpClientFactory httpClientFactory, ISubscriptionsRepository subscriptionsRepository, ITopicsRepository topicsRepository, IMapper mapper, DefaultEventGridEventHandler eventHandler, IOptions<AwesomeEventGridOptions> options)
+        public async Task InvokeAsync(HttpContext context, IHttpClientFactory httpClientFactory, ISubscriptionsRepository subscriptionsRepository, ITopicsRepository topicsRepository, IMapper mapper, IEventGridEventHandler eventGridEventHandler, IOptions<AwesomeEventGridOptions> options)
         {
             try
             {
@@ -51,7 +52,7 @@ namespace AwesomeEventGrid.Endpoints
 
                     var validation = new SubscriptionValidationEventDataModel() { ValidationCode = Guid.NewGuid().ToString() };
 
-                    var source = $"{options.Value.TopicsResourcePath}/{topic}#validation";
+                    var source = $"{options.Value.TopicsPath}/{topic}#validation";
 
                     var validationEvent = new EventModel
                     {

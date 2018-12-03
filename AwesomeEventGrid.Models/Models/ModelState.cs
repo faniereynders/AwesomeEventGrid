@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace AwesomeEventGrid.Models
+namespace AwesomeEventGrid.Abstractions.Models
 {
     public class ModelState: IReadOnlyDictionary<string, string[]>
     {

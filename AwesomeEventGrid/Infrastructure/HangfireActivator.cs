@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace AwesomeEventGrid.Infrastructure
 {
@@ -13,7 +14,11 @@ namespace AwesomeEventGrid.Infrastructure
 
         public override object ActivateJob(Type type)
         {
-            return _serviceProvider.GetService(type);
+            using (var scope = _serviceProvider.CreateScope())
+            {
+                return scope.ServiceProvider.GetService(type);
+            }
+            
         }
     }
 }

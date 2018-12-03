@@ -1,9 +1,9 @@
 ﻿using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 
-namespace AwesomeEventGrid.Models
+namespace AwesomeEventGrid.Abstractions.Models
 {
-    public class SubscriptionModel 
+    public class SubscriptionModel : ISubscription
     {
         public string Id { get; set; }
         [Required]

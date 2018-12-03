@@ -1,10 +1,11 @@
 ﻿using AutoMapper;
-using AwesomeEventGrid.Models;
 using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
 using AwesomeEventGrid.Infrastructure;
 using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Routing;
+using AwesomeEventGrid.Abstractions.Models;
+using AwesomeEventGrid.Abstractions.Options;
 
 namespace AwesomeEventGrid.Endpoints
 {

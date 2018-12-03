@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace AwesomeEventGrid.Models
+namespace AwesomeEventGrid.Abstractions.Models
 {
     public class SubscriptionValidationEventDataModel
     {

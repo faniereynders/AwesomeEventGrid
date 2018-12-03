@@ -1,5 +1,5 @@
-﻿using AwesomeEventGrid.Infrastructure;
-using AwesomeEventGrid.Models;
+﻿using AwesomeEventGrid.Abstractions.Models;
+using AwesomeEventGrid.Abstractions.Options;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;

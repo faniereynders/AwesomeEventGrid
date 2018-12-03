@@ -1,5 +1,5 @@
-﻿using AwesomeEventGrid.Infrastructure;
-using AwesomeEventGrid.Models;
+﻿using AwesomeEventGrid.Abstractions.Models;
+using AwesomeEventGrid.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApplication23.Controllers
@@ -8,12 +8,8 @@ namespace WebApplication23.Controllers
     [ApiController]
     public class DiagnosticsController : ControllerBase
     {
-        private readonly DefaultEventGridEventHandler eventHandler;
 
-        public DiagnosticsController(DefaultEventGridEventHandler eventHandler)
-        {
-            this.eventHandler = eventHandler;
-        }
+       
 
         // POST api/values
         [HttpPost(Name = "DiagnosticsHandler")]

@@ -1,14 +1,15 @@
 ﻿using AutoMapper;
-using AwesomeEventGrid.Models;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using System.IO;
-using AwesomeEventGrid.Infrastructure;
 using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Routing;
+using AwesomeEventGrid.Abstractions.Options;
+using AwesomeEventGrid.Abstractions;
+using AwesomeEventGrid.Abstractions.Models;
 
 namespace AwesomeEventGrid.Endpoints
 {
@@ -20,7 +21,7 @@ namespace AwesomeEventGrid.Endpoints
 
         }
 
-        public async Task InvokeAsync(HttpContext context, ITopicsRepository topicsRepository, IMapper mapper, DefaultEventGridEventHandler eventHandler)
+        public async Task InvokeAsync(HttpContext context, ITopicsRepository topicsRepository, IMapper mapper, IEventGridEventHandler eventGridEventHandler)
         {
             var options = context.RequestServices.GetService<IOptions<AwesomeEventGridOptions>>();
             ModelState.Reset();
@@ -36,7 +37,7 @@ namespace AwesomeEventGrid.Endpoints
                 using (var reader = new StreamReader(context.Request.Body, Encoding.UTF8))
                 {
                     var eventsToPublish = JsonConvert.DeserializeObject<EventModel[]>(await reader.ReadToEndAsync(), options.Value.SerializerSettings);
-                    eventHandler.Handle(topic, eventsToPublish);
+                    await eventGridEventHandler.HandleAsync(topic, eventsToPublish);
 
                     await Accepted(context);
 

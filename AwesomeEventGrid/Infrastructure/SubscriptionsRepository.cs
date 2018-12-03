@@ -24,7 +24,7 @@ namespace AwesomeEventGrid.Infrastructure
             var result = data.Subscriptions;
             if (topic != null)
             {
-                result = result.Where(t => t.Topic.Equals(topic, StringComparison.InvariantCultureIgnoreCase)).ToList();
+                result = result.Where(t => string.IsNullOrEmpty(t.Topic) || t.Topic.Equals(topic, StringComparison.InvariantCultureIgnoreCase)).ToList();
 
             }
 
